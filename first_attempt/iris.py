@@ -15,3 +15,4 @@ results, names = ml.training_loop(X_train = X_train, Y_train = Y_train, scoring 
 
 ml.predict(X_train = X_train, Y_train = Y_train, X_validation = X_validation, Y_validation = Y_validation)
 ml.show(layout = (2,2))
+preview = ml.data

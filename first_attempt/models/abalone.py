@@ -1,6 +1,7 @@
 # Load libraries
 import pandas
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Pandas imports
 from pandas.plotting      		   import scatter_matrix
@@ -20,20 +21,13 @@ from base.basic_ml import BaseML
 
 class AbaloneML(BaseML):
 	def __init__(self, seed, dataUrl, dataNames):
-		BaseML.__init__(self, seed = seed, dataUrl = dataUrl, dataNames = dataNames)
-
-	# This is gonna need overridden to work with a oneHotEncoder
-	# def training_loop(self, X_train, Y_train, scoring, models=[], n_splits = 10):
-		# return CheezML.training_loop(self, X_train, Y_train, scoring, models=[], n_splits=10)
-		# self.results = []
-		# self.names = []
-		# for name, model in models:
-		# 	kfold = model_selection.KFold(n_splits=n_splits, random_state=self.seed)
-		# 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
-		# 	self.results.append(cv_results)
-		# 	self.names.append(name)
-		# 	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-		# 	print(msg)
-		# 	return [self.results, self.names]
+		return BaseML.__init__(self, seed = seed, dataUrl = dataUrl, dataNames = dataNames).encode_feature('MFI', 'sex')
+       
+        
+	def split_validation(self, x_start, x_end, y_end, validation_size = 0.20):                
+		X = self.data.values
+		Y = self.data.rings.values
+		del self.data['rings']
+		return model_selection.train_test_split(X, Y, test_size=validation_size, random_state=self.seed)
 
 	

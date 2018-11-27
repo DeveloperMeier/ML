@@ -22,6 +22,15 @@ class BaseML:
 		self.names = dataNames
 		# Load dataset
 		self.data = pandas.read_csv(self.url, names=self.names)
+		return self
+    
+	def encode_feature(self, labels, column):
+		data = self.data
+		for l in labels:
+			data[l] = map(lambda x: int(x == l), data[column])
+		del data[column]
+		self.data = data
+	
 	
 	def split_validation(self, x_start, x_end, y_end, validation_size = 0.20):
 		array = self.data.values
@@ -33,7 +42,7 @@ class BaseML:
 
 	# Spot Check Algorithms
 	def make_models(self, models = []):
-		models.append(('LR(LogisticRegression):', LogisticRegression(solver="liblinear", multi_class="auto")))
+		models.append(('LR(LogisticRegression):', LogisticRegression(solver="liblinear", multi_class="ovr")))
 		models.append(('LDA(LinearDiscriminationAnalysis):', LinearDiscriminantAnalysis()))
 		models.append(('KNN(KNeighborsClassifier):', KNeighborsClassifier()))
 		models.append(('CART(DecisionTreeClassifier):', DecisionTreeClassifier()))
