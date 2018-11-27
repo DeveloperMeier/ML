@@ -15,7 +15,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes 		   import GaussianNB
 from sklearn.svm 				   import SVC
 
-from base.basicML import BaseML
+from base.basic_ml import BaseML
 
 
 class AbaloneML(BaseML):

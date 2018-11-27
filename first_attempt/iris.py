@@ -1,4 +1,4 @@
-from base.basicML import BaseML
+from base.basic_ml import BaseML
 
 seed = 7
 dataUrl = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
